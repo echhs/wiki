@@ -2,25 +2,33 @@ import fs from "fs";
 import http from "http";
 import querystring from "querystring";
 
-
+var mimeTypes = {
+	"html": "text/html",
+	"css": "text/css",
+	"js": "text/javascript",
+	"png": "image/png",
+	"jpg": "image/jpeg",
+	"jpeg": "image/jpeg",
+}
 
 const server = http.createServer((req, res) => {
 	var file;
 
-	if (req.path) {
-		file = `web/${req.path}.html`;
+	if (req.url && req.url.includes(".")) {
+		file = `web/${req.url}`;
+	}
+	else if(req.url != "/"){
+		file = `web/${req.url}.html`;
 	}
 	else {
-		
 		file = "web/index.html";
 	}
 
-	fs.readFile("web/index.html", (err, data) => {
-		if (err) res.write("Not Found").end();
+	fs.readFile(file, (err, data) => {
+		if (err) data = "Not Found";
 		else {
 			res.writeHead(200, {
-				"Content-Length": Buffer.byteLength(data),
-				"Content-Type": "text/html"
+				"Content-Type": mimeTypes[file.split(".")[1]]
 			});
 		}
 
