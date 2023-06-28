@@ -1,0 +1,13 @@
+body {
+	margin: 0;
+	height: 100vh;
+}
+
+.container {
+	display: inline-grid;
+	grid-template-columns: auto auto;
+}
+
+.container > div {
+	padding: 10px;
+}
