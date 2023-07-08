@@ -1,39 +1,18 @@
+import express from "express";
 import fs from "fs";
-import http from "http";
-import querystring from "querystring";
 
-var mimeTypes = {
-	"html": "text/html",
-	"css": "text/css",
-	"js": "text/javascript",
-	"png": "image/png",
-	"jpg": "image/jpeg",
-	"jpeg": "image/jpeg",
-}
+const app = express();
 
-const server = http.createServer((req, res) => {
-	var file;
+app.use(express.static("web"));
 
-	if (req.url && req.url.includes(".")) {
-		file = `web/${req.url}`;
-	}
-	else if(req.url != "/"){
-		file = `web/${req.url}.html`;
-	}
-	else {
-		file = "web/index.html";
-	}
-
-	fs.readFile(file, (err, data) => {
-		if (err) data = "Not Found";
-		else {
-			res.writeHead(200, {
-				"Content-Type": mimeTypes[file.split(".")[1]]
-			});
-		}
-
-		res.end(data);
-	});
+app.get("/wiki/:article", (req, res) => {
+    res.sendFile(`${process.cwd()}/web/article.html`);
 });
 
-server.listen(8080);
+app.get("/", (req, res) => {
+    res.redirect(`/wiki/Main_Page`);
+});
+
+app.listen(8080, (err) => {
+    if (err) throw err;
+});
