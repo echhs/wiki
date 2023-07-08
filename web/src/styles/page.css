@@ -1,0 +1,25 @@
+body {
+	margin: 0;
+	height: 100vh;
+	background-color: #1a1a1a;
+	color: white;
+}
+
+.container {
+	display: inline-grid;
+	grid-template-columns: auto auto;
+}
+
+.container > div {
+	padding: 10px;
+}
+
+.sidebar{
+	padding-right: 10px;
+	padding-left: 10px;
+}
+
+.sidebar-nav > a{
+	display: block;
+	margin-bottom: 10px;
+}
