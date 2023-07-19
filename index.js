@@ -27,11 +27,11 @@ app.get("/wiki/:article", (req, res) => {
         var dom = new JSDOM(html);
         fs.readFile(`web/content/${req.params.article}.md`, {encoding: "utf-8"}, (err, md) =>{
             if (err) {
-                console.log(err);
                 res.sendStatus(404);
             }
             else{
                 dom.window.document.getElementById("related-changes").href = `https://github.com/echhs/wiki/commits/main/web/content/${req.params.article}.md`;
+                dom.window.document.getElementById("suggest").href = `https://github.com/echhs/wiki/blob/main/web/content/${req.params.article}.md`;
                 dom.window.document.getElementById("page-title").innerHTML = title;
                 dom.window.document.getElementById("content").innerHTML += marked.parse(md);
                 res.setHeader("Content-Type", "text/html");

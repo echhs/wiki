@@ -1,1 +1,1 @@
-Welcome to the ECHHS wiki! Browse articles in the [catalog](catalog), suggest an [edit](), or visit a random article
+Welcome to the ECHHS wiki! Browse articles in the [catalog](catalog), suggest a [change](), or visit a [random article](random)
