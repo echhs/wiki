@@ -14,8 +14,10 @@ const app = express();
 
 app.use(express.static("web"));
 
-app.get("/random", (req, res) => {
+app.get("/wiki/random", (req, res) => {
     fs.readdir("web/content", (err, files) => {
+        var article = files[Math.floor(Math.random() * files.length)].replaceAll(".md", "");
+        res.redirect(`/wiki/${article}`);
     });
 });
 
@@ -29,6 +31,7 @@ app.get("/wiki/:article", (req, res) => {
                 res.sendStatus(404);
             }
             else{
+                dom.window.document.getElementById("related-changes").href = `https://github.com/echhs/wiki/commits/main/web/content/${req.params.article}.md`;
                 dom.window.document.getElementById("page-title").innerHTML = title;
                 dom.window.document.getElementById("content").innerHTML += marked.parse(md);
                 res.setHeader("Content-Type", "text/html");
