@@ -1,1 +1,1 @@
-## hello world
+Welcome to the ECHHS wiki! Browse articles in the [catalog](catalog), suggest an [edit](), or visit a random article

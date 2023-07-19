@@ -23,3 +23,11 @@ body {
 	display: block;
 	margin-bottom: 10px;
 }
+
+a{
+	color: lightblue;
+}
+
+a:visited{
+	color: lightblue;
+}
